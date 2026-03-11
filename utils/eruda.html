@@ -64,6 +64,35 @@
         .back-link:hover {
             text-decoration: underline;
         }
+        .bookmarklet-textarea {
+            width: 100%;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85em;
+            border: 1px solid #c5cae9;
+            border-radius: 8px;
+            padding: 10px 12px;
+            background: #f5f7ff;
+            color: #1a1a2e;
+            resize: vertical;
+            margin-top: 12px;
+        }
+        .copy-btn {
+            display: inline-block;
+            background: #5c6bc0;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 18px;
+            font-size: 0.9em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+        .copy-btn:hover {
+            background: #3949ab;
+        }
     </style>
 </head>
 <body>
@@ -81,7 +110,38 @@
                href="javascript:(function(){const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/eruda';document.body.appendChild(s);s.onload=function(){eruda.init();};s.onerror=function(){alert('Erudaの読み込みに失敗しました。');};})();">
                 🔧 Eruda を起動
             </a>
+            <p style="margin-top:18px; color:#444; font-size:0.9em;">
+                ドラッグ＆ドロップが難しい場合は、以下のテキストをコピーしてブックマークの URL に貼り付けてください。
+            </p>
+            <textarea id="bookmarklet-text" class="bookmarklet-textarea" rows="4" readonly>javascript:(function(){const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/eruda';document.body.appendChild(s);s.onload=function(){eruda.init();};s.onerror=function(){alert('Erudaの読み込みに失敗しました。');};})();</textarea>
+            <button class="copy-btn" onclick="copyBookmarklet()">📋 コピー</button>
         </div>
     </div>
+    <script>
+        function copyBookmarklet() {
+            const textarea = document.getElementById('bookmarklet-text');
+            const btn = document.querySelector('.copy-btn');
+            function showSuccess() {
+                btn.textContent = '✅ コピー完了';
+                setTimeout(function() { btn.textContent = '📋 コピー'; }, 2000);
+            }
+            function showFailure() {
+                btn.textContent = '❌ コピー失敗';
+                setTimeout(function() { btn.textContent = '📋 コピー'; }, 2000);
+            }
+            navigator.clipboard.writeText(textarea.value).then(function() {
+                showSuccess();
+            }).catch(function() {
+                try {
+                    textarea.select();
+                    textarea.setSelectionRange(0, textarea.value.length);
+                    document.execCommand('copy');
+                    showSuccess();
+                } catch (e) {
+                    showFailure();
+                }
+            });
+        }
+    </script>
 </body>
 </html>
