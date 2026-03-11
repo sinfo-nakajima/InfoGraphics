@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ユーティリティ</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: #f0f4f8;
+            color: #1a1a2e;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #1a237e;
+            margin-bottom: 40px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(26,35,126,0.10);
+            padding: 28px 32px;
+            margin-bottom: 24px;
+        }
+        .card h2 {
+            color: #1a237e;
+            margin-top: 0;
+            font-size: 1.1em;
+        }
+        .card p {
+            color: #444;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        .bookmarklet-btn {
+            display: inline-block;
+            background: #1a237e;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .bookmarklet-btn:hover {
+            background: #283593;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: #5c6bc0;
+            text-decoration: none;
+            font-size: 0.95em;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="back-link" href="../index.html">← 一覧に戻る</a>
+        <h1>🛠️ ユーティリティ</h1>
+
+        <div class="card">
+            <h2>Eruda モバイルコンソール</h2>
+            <p>
+                以下のボタンをブラウザのブックマークバーにドラッグ＆ドロップしてブックマークレットとして登録してください。<br>
+                登録後、任意のページでそのブックマークをクリックすると Eruda コンソールが起動します。
+            </p>
+            <a class="bookmarklet-btn"
+               href="javascript:(function(){const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/eruda';document.body.appendChild(s);s.onload=function(){eruda.init();};s.onerror=function(){alert('Erudaの読み込みに失敗しました。');};})();">
+                🔧 Eruda を起動
+            </a>
+        </div>
+    </div>
+</body>
+</html>
